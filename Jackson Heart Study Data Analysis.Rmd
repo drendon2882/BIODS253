@@ -8,18 +8,43 @@ date: "2024-03-04"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+The Jackson Heart Study is a community-based cohort study evaluating the etiology of cardiovascular diseases among African Americans residing in Hinds, Madison, and Rankin counties in the Jackson, Mississippi metropolitan area. Data was collected from 5306 participants and we will be conducing an analysis on an existing Jackson Heart Study data set.
 
+The research question for this analysis is:
 
-```{r cars}
-summary(cars)
+***Is smoking associated with hypertension after controlling for socio-demographic variables?***
+
+```{r}
+library(here)
+library(rprojroot)
+
+rprojroot::find_rstudio_root_file()
+
+# Move data set into project directory data folder
+file.copy(from = "/Users/drendon/Desktop/baseline_jhs.csv",
+          to   = "/Users/drendon/BIODS253 Final/Data/baseline_jhs.csv")
 ```
 
-## Including Plots
+## Data Exploration
 
-You can also embed plots, for example:
+First, we will explore the data structure and variables.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(tidyverse)
+jhs_data = read_csv(here("data/baseline_jhs.csv"))
+head(jhs_data)
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+-   Each column represents a variable and each row represents a patient.
+
+    ```{r}
+    #check continuous variables - age
+    hist(jhs_data$ageV1, breaks = 100)
+    summary(jhs_data$ageV1)
+
+    ```
+
+-   Age variable
+
+    -   Results show patient with age = 999
