@@ -43,8 +43,32 @@ head(jhs_data)
     hist(jhs_data$ageV1, breaks = 100)
     summary(jhs_data$ageV1)
 
+    #check continuous variables - alcohol
+    hist(jhs_data$alcwV1)
+
     ```
 
 -   Age variable
 
     -   Results show patient with age = 999
+
+```{r}
+# check categorical variables
+table(jhs_data$maleV1, useNA = "ifany")
+table(jhs_data$IncomeV1, useNA = "ifany")
+table(jhs_data$edu3catV1, useNA = "ifany")
+
+#check missing percentages for income based on check above
+mean(is.na(jhs_data$IncomeV1))
+
+```
+
+## Data Cleaning
+
+Based on some of the findings above, we will conduct some data cleaning.
+
+```{r}
+#Assume anyone over 125 years does not have a valid age and create a new dataset
+clean_jhs_data = jhs_data %>% 
+  mutate(ageV1 = if_else(ageV1>120, NA, ageV1))
+```
