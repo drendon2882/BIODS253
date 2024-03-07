@@ -72,3 +72,63 @@ Based on some of the findings above, we will conduct some data cleaning.
 clean_jhs_data = jhs_data %>% 
   mutate(ageV1 = if_else(ageV1>120, NA, ageV1))
 ```
+
+## Descriptive Statistics 
+
+Categorical Variables:
+
+```{r}
+# check relative counts of smoking and hypertension in dataset
+clean_jhs_data = clean_jhs_data %>% 
+  mutate(income_cat = case_when(IncomeV1=="Affluent" ~ "High",
+                                IncomeV1=="Upper-middle" ~ "High",
+                                is.na(IncomeV1) ~ NA,
+                                T ~ "Low"))
+
+table(clean_jhs_data$income_cat, clean_jhs_data$IncomeV1, useNA = "ifany")
+```
+
+Continuous Variables:
+
+```{r}
+#compare age across smoking and hypertension
+hist(clean_jhs_data$ageV1)
+
+hist(clean_jhs_data %>% 
+       filter(maleV1 == "Male") %>% 
+       pull(ageV1))
+
+hist(clean_jhs_data %>% 
+       filter(maleV1 == "Female") %>% 
+       pull(ageV1))
+```
+
+Create table for analyzing exposure variables:
+
+```{r}
+#statistics
+clean_jhs_data %>% 
+  group_by(everSmokerV1) %>% 
+  summarise(mean_age = mean(ageV1, na.rm=T),
+            median_alc = median(alcwV1, na.rm=T),
+            mean_depression= median(depressionV1, na.rm=T))
+
+table(clean_jhs_data$maleV1, clean_jhs_data$everSmokerV1, useNA = "ifany")
+
+table(clean_jhs_data$IncomeV1, clean_jhs_data$everSmokerV1, useNA = "ifany")
+```
+
+Use table package:
+
+```{r}
+library(table1)
+```
+
+```{r}
+#filter out missing variables because table package won't accept
+table1_data = clean_jhs_data %>% 
+  filter(!is.na(everSmokerV1))
+
+table1(~ageV1 +maleV1 + alcwV1 +IncomeV1 + edu3catV1 + dailyDiscrV1 +
+         depressionV1 + discrmBurdenV1 + sbpV1 +dbpV1 +income_cat | everSmokerV1, data = table1_data)
+```
