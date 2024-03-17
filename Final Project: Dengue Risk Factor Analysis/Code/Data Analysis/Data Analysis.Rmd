@@ -1,0 +1,163 @@
+```{r}
+#import merged dengue data set to complete data analysis
+merged_dengue_data = read_csv(here("Final Project: Dengue Risk Factor Analysis","Data","Processed Data","merged_dengue_data.csv"))
+glimpse(merged_dengue_data)
+```
+
+```{r}
+
+```
+
+```{r}
+#total individuals
+total_individuals = nrow(merged_dengue_data)
+print(paste("Total individuals:", total_individuals))
+
+#individuals with no infection
+total_individuals_no_infection = sum(merged_dengue_data$any_infections == FALSE)
+print(paste("Total individuals with no history of infection:", total_individuals_no_infection))
+
+#individuals with any infection
+total_individuals_any_infection = sum(merged_dengue_data$any_infections == TRUE)
+print(paste("Total individuals with any history of infection:", total_individuals_any_infection))
+
+```
+
+-   Calculate age statistics stratified across infection status
+
+```{r}
+#mean age (and standard deviation) for total individuals
+merged_dengue_data %>% 
+  summarise(mean_age = round(mean(age), 1),
+            age_SD = round(sd(age), 1))
+
+#mean age (and standard deviation) grouped by infection history
+merged_dengue_data %>% 
+  group_by(any_infections) %>% 
+  summarise(age_infection = round(mean(age), 1),
+            age_infection_SD = round(sd(age), 1))
+```
+
+-   Calculate gender statistics stratified across infection status
+
+```{r}
+#total number of females/male and percentages
+total_females = sum(merged_dengue_data$sex == "F")
+print(paste("Total females:", total_females))
+
+total_females_percent = round((total_females/total_individuals) * 100, 1)
+print(paste("Total percentage of females:", total_females_percent))
+
+
+total_males = sum(merged_dengue_data$sex == "M")
+print(paste("Total males:", total_males))
+
+total_males_percent = round((total_males/total_individuals) * 100, 1)
+print(paste("Total percentage of males:", total_males_percent))
+
+#Gender/infection table
+gender_infection_table = table(merged_dengue_data$sex,
+                               merged_dengue_data$any_infections)
+gender_infection_table
+
+gender_infection_table_percent = round(prop.table(gender_infection_table, margin = 2) * 100, 2)
+gender_infection_table_percent
+```
+
+-   Calculate statistics between infection and concrete house types
+
+    ```{r}
+    #concrete and nonconcrete houses with and without infections totals
+    total_concrete_houses = sum(merged_dengue_data$concrete_house == 1)
+    print(paste("Total concrete houses:", total_concrete_houses))
+
+    total_concrete_houses_percent = round((total_concrete_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of concrete houses:", total_concrete_houses_percent))
+
+
+    total_non_concrete_houses = sum(merged_dengue_data$concrete_house == 0)
+    print(paste("Total non-concrete houses:", total_non_concrete_houses))
+
+    total_non_concrete_houses_percent = round((total_non_concrete_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of non-concrete houses:", total_non_concrete_houses_percent))
+
+    #concrete and nonconcrete houses with and without infections
+    concrete_house_infection_table = table(merged_dengue_data$concrete_house,
+                                   merged_dengue_data$any_infections)
+    concrete_house_infection_table
+
+    concrete_house_infection_table_percent = round(prop.table(concrete_house_infection_table, margin = 2) * 100, 2)
+    concrete_house_infection_table_percent
+    ```
+
+```{=html}
+<!-- -->
+```
+-   Calculate statistics between infection and concrete house types
+
+    ```{r}
+    #house types: One of three household types. "Poles" indicates the house is built on stilts, as homes on floodplains typically are. "Single" indicates the house is a single-family home separate from other homes. "Townhouse" indicates the house if part of a multifamily unit where multiple homes are physically connected.
+
+    #pole houses
+    total_pole_houses = sum(merged_dengue_data$house_type == "Poles")
+    print(paste("Total pole houses:", total_pole_houses))
+
+    total_pole_houses_percent = round((total_pole_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of pole houses:", total_pole_houses_percent))
+
+    #single family houses
+    total_single_houses = sum(merged_dengue_data$house_type == "Single")
+    print(paste("Total single houses:", total_single_houses))
+
+    total_single_houses_percent = round((total_single_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of single houses:", total_single_houses_percent))
+
+    #single townhouses
+    total_townhouses = sum(merged_dengue_data$house_type == "Townhouse")
+    print(paste("Total townhouses:", total_townhouses))
+
+    total_townhouses_percent = round((total_townhouses/total_individuals) * 100, 1)
+    print(paste("Total percentage of townhouses:", total_townhouses_percent))
+
+    #house types with and without infections
+    house_type_infection_table = table(merged_dengue_data$house_type,
+                                   merged_dengue_data$any_infections)
+    house_type_infection_table
+
+    house_type_infection_table_percent = round(prop.table(house_type_infection_table, margin = 2) * 100, 2)
+    house_type_infection_table_percent
+    ```
+
+-   Calculate statistics between infection and concrete house types
+
+    ```{r}
+    # 1, if the house is supplied water by pipes. 0, if the house receives water some other way
+    #water supplied by pipes
+    total_pipe_houses = sum(merged_dengue_data$water_supply_by_pipe_clean == 1, na.rm = TRUE)
+    print(paste("Total pipe houses:", total_pipe_houses))
+
+    total_pipe_houses_percent = round((total_pipe_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of pipe houses:", total_pipe_houses_percent))
+
+    #water not supplied by pipe
+    total_non_pipe_houses = sum(merged_dengue_data$water_supply_by_pipe_clean == 0, na.rm= TRUE)
+    print(paste("Total non_pipe houses:", total_non_pipe_houses))
+
+    total_non_pipe_houses_percent = round((total_non_pipe_houses/total_individuals) * 100, 1)
+    print(paste("Total percentage of non-pipe houses:", total_non_pipe_houses_percent))
+
+    #total houses with pipe supply data missing
+    total_pipe_data_missing = sum(is.na(merged_dengue_data$water_supply_by_pipe_clean))
+    print(paste("Total pipe supply data missing:", total_pipe_data_missing))
+
+    total_pipe_data_missing_percent = round((total_pipe_data_missing/total_individuals) * 100, 1)
+    print(paste("Total percentage of non-pipe houses:", total_pipe_data_missing_percent))
+
+    #house types with and without infections
+    pipe_infection_table = table(merged_dengue_data$water_supply_by_pipe_clean,
+                                   merged_dengue_data$any_infections)
+    pipe_infection_table
+
+    pipe_infection_table_percent = round(prop.table(pipe_infection_table, margin = 2) * 100, 2)
+    pipe_infection_table_percent
+    ```
