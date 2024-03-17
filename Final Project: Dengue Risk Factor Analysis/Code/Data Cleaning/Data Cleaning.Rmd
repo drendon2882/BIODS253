@@ -160,4 +160,6 @@ write.csv(individual_data_cleaned, file = here("Final Project: Dengue Risk Facto
 write.csv(household_data_cleaned, file = here("Final Project: Dengue Risk Factor Analysis/Data/Processed Data/household_data_cleaned.csv"), row.names = FALSE)
 
 
+write.csv(merged_dengue_data, file = here("Final Project: Dengue Risk Factor Analysis/Data/Processed Data/merged_dengue_data.csv"), row.names = FALSE)
+
 ```
