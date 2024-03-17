@@ -102,3 +102,62 @@ percent_missing_water_supply_by_pipe
 
 -   There are 95 missing/unknown values for water_supply_by_pipe
 -   About 10% of values are missing for that variable
+
+# Data Cleaning
+
+```{r}
+#create copies of individual and household data
+individual_data_cleaned = individual_data
+household_data_cleaned = household_data
+
+#recode missing/unknown values in water_supply_by_pipe variable to NA and to numerics
+household_data_cleaned = household_data_cleaned %>% 
+  mutate(water_supply_by_pipe_clean = ifelse(water_supply_by_pipe == "Unknown", NA,
+                                      as.numeric(water_supply_by_pipe)))
+
+#check numerics
+check_numeric = sapply(household_data_cleaned$water_supply_by_pipe_clean, is.numeric)
+check_numeric
+
+```
+
+Add the following variables to individual_data_cleaned:
+
+-   `age_cat`, that is "adult" for people 18 or older and "child" for people under 18.
+
+-   `n_any_infections`, the sum of symptomatic and asymptomatic infections for each person.
+
+-   `any_infections`, that is `TRUE` if the individual was ever infected with symptomatic or asymptomatic dengue.
+
+```{r}
+individual_data_cleaned = individual_data_cleaned %>% 
+  mutate(age_cat = ifelse(age >= 18, "Adult", "Child"),
+         n_any_infections = n_symp_infections + n_asymp_infections,
+         any_infections = (n_symp_infections > 0 | n_asymp_infections > 0))
+
+#check new variables
+select(individual_data_cleaned, age, age_cat)
+
+select(individual_data_cleaned, n_symp_infections, n_asymp_infections, n_any_infections, any_infections)
+
+```
+
+-   Join household and individual data sets by common household ID variable. Resulting data frame contains 1 row per individual with columns for both individual and household level variables.
+
+```{r}
+#merge individual_data_cleaned and household_data_cleaned (full_join to ensure all existing and new variables are included in the merged dataset)
+merged_dengue_data = full_join(individual_data_cleaned, household_data_cleaned, by = "hh_ID")
+
+#check merged dataset
+head(merged_dengue_data)
+
+```
+
+```{r}
+#save new data sets into processed data folder
+write.csv(individual_data_cleaned, file = here("Final Project: Dengue Risk Factor Analysis/Data/Processed Data/individual_data_cleaned.csv"), row.names = FALSE)
+
+write.csv(household_data_cleaned, file = here("Final Project: Dengue Risk Factor Analysis/Data/Processed Data/household_data_cleaned.csv"), row.names = FALSE)
+
+
+```
