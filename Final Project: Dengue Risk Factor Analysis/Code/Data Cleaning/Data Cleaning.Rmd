@@ -40,3 +40,65 @@ glimpse(household_data)
 | `w ater_supply_by_pipe` | 1, if the house is supplied water by pipes. 0, if the house receives water some other way                                                                                                                                                                                                                         |
 | `garbage_management`    | One of three methods for getting rid of household waste. "Burn" if it is burned by the residents. "Car" if it is disposed of by a vehicle that collects waste. "Dump" if it is brought to a waste disposal facility by the residents.                                                                             |
 | `n_toilets_outside`     | Count of the outdoor toilets available to the household residents                                                                                                                                                                                                                                                 |
+
+# Data Exploration
+
+```{r}
+#see part of the data
+names(individual_data)
+names(household_data)
+
+head(individual_data)
+head(household_data)
+
+#explore distribution of continuous variable age in the individual dataset
+hist(individual_data$age)
+summary(individual_data$age)
+
+#explore distribution of the categorical variables n_symp_infections and n_asymp_infections in the individual dataset
+table(individual_data$n_symp_infections)
+table(individual_data$n_asymp_infections)
+table(individual_data$sex)
+
+#explore distribution of the categorical variables door_screens, concrete_house, water_supply_by_pipe, and n_toilets_outside in the individual dataset
+table(household_data$door_screens)
+table(household_data$concrete_house)
+table(household_data$water_supply_by_pipe)
+table(household_data$n_toilets_outside)
+
+#Ensure that there are no missing hh_IDs from both datasets
+summary(individual_data$hh_ID)
+summary(household_data$hh_ID)
+
+#check for missing data
+prop.table(table(is.na(individual_data$age)))
+prop.table(table(is.na(individual_data$sex)))
+prop.table(table(is.na(individual_data$n_symp_infections)))
+prop.table(table(is.na(individual_data$n_asymp_infections)))
+
+prop.table(table(is.na(household_data$door_screens)))
+prop.table(table(is.na(household_data$concrete_house)))
+prop.table(table(is.na(household_data$water_supply_by_pipe)))
+prop.table(table(is.na(household_data$n_toilets_outside)))
+```
+
+-   There are missing values in the water_supply_by_pipe variable in the household_data
+
+-   Missing values are coded as "Unknown"
+
+```{r}
+#find the percentage of missing values for the water_supply_by_pipe variable in household_data
+total_water_supply_by_pipe_count = household_data %>% 
+  nrow()
+
+missing_water_supply_by_pipe_count = sum(household_data$water_supply_by_pipe == "Unknown")
+
+missing_water_supply_by_pipe_count
+
+percent_missing_water_supply_by_pipe = (missing_water_supply_by_pipe_count / total_water_supply_by_pipe_count) *100
+
+percent_missing_water_supply_by_pipe
+```
+
+-   There are 95 missing/unknown values for water_supply_by_pipe
+-   About 10% of values are missing for that variable
