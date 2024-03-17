@@ -3,8 +3,14 @@ Stanford Software Engineering Class
 
 There are 2 folders:
 
- - Warm-Up:Jackson Heart Study 
  - EPI 202 Final Project
+ - Warm-Up:Jackson Heart Study 
+
  
- Each of the two folders include their own datasets and research questions to practice research fundamentals in R
+The main folder to review is the EPI 202 Final Project.
+The final project will study household risk factors and influences on dengue
+infections in Kamphaeng Phet province in Thailand. This study uses data and is 
+based on the study that was published in Nature Microbiology. 
+
+The research question is: "Are household factors associated with dengue infection?"
 

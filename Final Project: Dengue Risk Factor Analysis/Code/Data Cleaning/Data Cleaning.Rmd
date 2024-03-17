@@ -1,0 +1,42 @@
+```{r}
+library(tidyverse)
+library(here)
+library(ggplot2)
+```
+
+## Individual data
+
+```{r}
+individual_data = read_csv(here("Final Project: Dengue Risk Factor Analysis","Data","Raw Data","dengue_individual_data.csv"))
+glimpse(individual_data)
+
+```
+
+**Data dictionary:**
+
+| Variable Name        | Description                                                                              |
+|------------------|------------------------------------------------------|
+| `ID`                 | Individual identifier                                                                    |
+| `hh_ID`              | Household identifier                                                                     |
+| `sex`                | Biological sex                                                                           |
+| `n_symp_infections`  | Count of times this individual has had a symptomatic dengue infection during the study   |
+| `n_asymp_infections` | Count of times this individual has had an asymptomatic dengue infection during the study |
+
+## Household data
+
+```{r}
+household_data = read_csv(here("Final Project: Dengue Risk Factor Analysis","Data","Raw Data","dengue_household_data.csv"))
+glimpse(household_data)
+```
+
+**Data Dictionary:**
+
+| Variable Name           | Description                                                                                                                                                                                                                                                                                                       |
+|----------------|--------------------------------------------------------|
+| `hh_ID`                 | Household identifier                                                                                                                                                                                                                                                                                              |
+| `door_screens`          | 1, if the household has a screen door. 0, otherwise                                                                                                                                                                                                                                                               |
+| `house_type`            | One of three household types. "Poles" indicates the house is built on stilts, as homes on floodplains typically are. "Single" indicates the house is a single-family home separate from other homes. "Townhouse" indicates the house if part of a multifamily unit where multiple homes are physically connected. |
+| `concrete_house`        | 1, if the house was built from concrete. 0, otherwise                                                                                                                                                                                                                                                             |
+| `w ater_supply_by_pipe` | 1, if the house is supplied water by pipes. 0, if the house receives water some other way                                                                                                                                                                                                                         |
+| `garbage_management`    | One of three methods for getting rid of household waste. "Burn" if it is burned by the residents. "Car" if it is disposed of by a vehicle that collects waste. "Dump" if it is brought to a waste disposal facility by the residents.                                                                             |
+| `n_toilets_outside`     | Count of the outdoor toilets available to the household residents                                                                                                                                                                                                                                                 |
