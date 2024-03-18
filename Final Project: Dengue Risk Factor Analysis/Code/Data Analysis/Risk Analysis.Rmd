@@ -65,3 +65,19 @@ confint(screen_door_infections_glm)
 exp(confint(screen_door_infections_glm))
 
 ```
+
+-   Interpretation:
+
+Extend the model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors, controlling for house type and garbage management:
+
+```{r}
+#logistic model for odds ratio between dengue infection and screen door controlling for garbage management and house type
+screen_door_infections_controlling_glm = glm(any_infections ~ door_screens + house_type + garbage_management, data= merged_dengue_data, family="binomial")
+summary(screen_door_infections_glm)
+
+# Calculate confidence intervals
+confint(screen_door_infections_controlling_glm)
+
+#calculate odds ratio
+exp(confint(screen_door_infections_controlling_glm))
+```
