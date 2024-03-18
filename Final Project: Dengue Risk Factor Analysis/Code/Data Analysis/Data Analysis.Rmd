@@ -150,18 +150,11 @@ gender_infection_table_percent
 
     #house types with and without infections
     pipe_infection_table = table(merged_dengue_data$water_supply_by_pipe_clean,
-                                   merged_dengue_data$any_infections)
+                                   merged_dengue_data$any_infections,  useNA = "ifany")
     pipe_infection_table
 
     pipe_infection_table_percent = round(prop.table(pipe_infection_table, margin = 2) * 100, 2)
     pipe_infection_table_percent
-
-    #pipe data missing table
-    pipe_missing_table = table(is.na(merged_dengue_data$water_supply_by_pipe_clean), merged_dengue_data$any_infections)
-    pipe_missing_table
-
-    pipe_missing_table_percent = prop.table(pipe_missing_table, margin = 2) * 100
-    pipe_missing_table_percent
     ```
 
 +--------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
