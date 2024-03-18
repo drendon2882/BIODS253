@@ -5,10 +5,6 @@ glimpse(merged_dengue_data)
 ```
 
 ```{r}
-
-```
-
-```{r}
 #total individuals
 total_individuals = nrow(merged_dengue_data)
 print(paste("Total individuals:", total_individuals))
@@ -90,9 +86,8 @@ gender_infection_table_percent
     concrete_house_infection_table_percent
     ```
 
-```{=html}
 <!-- -->
-```
+
 -   Calculate statistics between infection and concrete house types
 
     ```{r}
@@ -204,3 +199,17 @@ gender_infection_table_percent
 +--------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
 | \- Missing               | 422 (9.4)                                                                | 327 (9.3)                                                                | 95 (9.9)                                                                 |
 +--------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+--------------------------------------------------------------------------+
+
+```{r}
+#create contingency table for infections and whether a house has a screen door or not
+door_infection_table = table(merged_dengue_data$door_screens,
+                               merged_dengue_data$any_infections)
+door_infection_table
+
+```
+
+| Table 2         | No Infection | Any Infection |
+|-----------------|:------------:|:-------------:|
+| Screen Door, N  |     ---      |      ---      |
+| \- Yes          |     623      |      192      |
+| \- No           |     2906     |      769      |
