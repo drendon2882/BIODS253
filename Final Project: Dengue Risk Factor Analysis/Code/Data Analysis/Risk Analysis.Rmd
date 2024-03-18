@@ -1,0 +1,67 @@
+# Risk Analysis and Statistical Inference
+
+Calculate the odds ratio for being infected with dengue by whether the house is made of concrete:
+
+```{r}
+#number of infections and no infections in concrete homes
+n_infections_concrete = sum(merged_dengue_data$any_infections[merged_dengue_data$concrete_house ==1])
+n_no_infections_concrete = sum(!merged_dengue_data$any_infections[merged_dengue_data$concrete_house ==1])
+
+#calculate odds of being infected in concrete home
+odds_concrete = n_infections_concrete/n_no_infections_concrete
+
+#number of infections and no infections in non-concrete homes
+n_infections_nonconcrete = sum(merged_dengue_data$any_infections[merged_dengue_data$concrete_house ==0])
+n_no_infections_nonconcrete = sum(!merged_dengue_data$any_infections[merged_dengue_data$concrete_house ==0])
+
+#calculate odds of being infected in non-concrete home
+odds_nonconcrete = n_infections_nonconcrete/n_no_infections_nonconcrete
+
+concrete_OR = odds_concrete / odds_nonconcrete
+print(paste("Odds of infection by whether house is made from concrete:", concrete_OR))
+```
+
+-   The odds ratio value indicates that there is no association between the house made of concrete and being infected with dengue, although it is slightly above 1 which would mean that an individual has a slightly higher chance of being infected with dengue if he or she lives in a concrete home.
+
+Run a chi-square test to assess if there is a difference in any dengue infection between males and females:
+
+```{r}
+#chi-square test
+chisq.test(merged_dengue_data$sex, merged_dengue_data$any_infections)
+
+#check which group had higher rate of infections
+gender_infection_table
+
+```
+
+-   Although females had more infections than men in this study, since the p-value of 0.1452 is greater than the typical significance level of 0.05, we do not reject the null hypothesis, meaning that there is insufficient evidence to conclude that there is a statistically significant difference in any dengue infections between males and females.
+
+Use a linear model to assess how the number of outdoor toilets affects the number of dengue infections. Get a 95% confidence interval for your estimate:
+
+```{r}
+outdoor_toilets_n_infections_lm = lm(n_any_infections~n_toilets_outside, data = merged_dengue_data)
+
+summary(outdoor_toilets_n_infections_lm)
+
+#obtain confidence intervals
+#confint(outdoor_toilets_n_infections_lm, level = 0.95)
+
+# Calculate confidence intervals
+confint(outdoor_toilets_n_infections_lm)
+```
+
+-   Given that the p-value is greater than 0.585, the results are not statistically significant and the number of outdoor toilets may not affect the number of dengue infections an individual or household has.
+
+Use a logistic model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors:
+
+```{r}
+screen_door_infections_glm = glm(any_infections ~ door_screens, data= merged_dengue_data, family="binomial")
+summary(screen_door_infections_glm)
+
+# Calculate confidence intervals
+confint(screen_door_infections_glm)
+
+#calculate odds ratio
+exp(confint(screen_door_infections_glm))
+
+```
