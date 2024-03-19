@@ -70,7 +70,7 @@ exp(screen_door_infections_glm$coefficients)
 Extend the model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors, controlling for house type and garbage management:
 
 ```{r}
-#logistic model for odds ratio between dengue infection and screen door controlling for garbage management and house type
+#logistic regression for screen doors, controlling for house type and garbage management
 screen_door_infections_controlling_glm = glm(any_infections ~ door_screens + house_type + garbage_management, data= merged_dengue_data, family="binomial")
 summary(screen_door_infections_glm)
 
@@ -78,5 +78,7 @@ summary(screen_door_infections_glm)
 confint(screen_door_infections_controlling_glm)
 
 #calculate odds ratio
-exp(confint(screen_door_infections_controlling_glm))
+exp(screen_door_infections_controlling_glm$coefficients)
 ```
+
+*Interpretation:* The odds ratio of being infected with dengue is 1.12 if you do not have door screens, compared to having door screens; however the p-value is greater than 0.05 so it is not statistically significant.
