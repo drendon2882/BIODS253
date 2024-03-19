@@ -39,12 +39,11 @@ gender_infection_table
 Use a linear model to assess how the number of outdoor toilets affects the number of dengue infections. Get a 95% confidence interval for your estimate:
 
 ```{r}
+#linear regression model
 outdoor_toilets_n_infections_lm = lm(n_any_infections~n_toilets_outside, data = merged_dengue_data)
 
 summary(outdoor_toilets_n_infections_lm)
 
-#obtain confidence intervals
-#confint(outdoor_toilets_n_infections_lm, level = 0.95)
 
 # Calculate confidence intervals
 confint(outdoor_toilets_n_infections_lm)
@@ -62,11 +61,11 @@ summary(screen_door_infections_glm)
 confint(screen_door_infections_glm)
 
 #calculate odds ratio
-exp(confint(screen_door_infections_glm))
+exp(screen_door_infections_glm$coefficients)
 
 ```
 
--   Interpretation:
+-   Interpretation: The coefficient associated with having door screens is 0.15, meaning that the log odds of having a dengue infection increase by 0.15 if you do not have a screen door. The odds ratio of having an infection without a screen door is 1.16; however, since the p-value = 0.0975, and this is greater than 0.05, this means that the odds ratio is not statistically significant.
 
 Extend the model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors, controlling for house type and garbage management:
 
