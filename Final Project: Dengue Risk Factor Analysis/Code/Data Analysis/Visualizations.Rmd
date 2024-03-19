@@ -16,3 +16,15 @@ ggplot(merged_dengue_data, aes(x = age, y = n_any_infections)) +
   ylab("Number of Infections") +
   ggtitle("Number of Dengue Infections By Age")
 ```
+
+Make a boxplot of the number of any dengue infections by house type. Place house type of the x-axis and infections on the y-axis. Order the house type from left to right as "Single", "Townhouse", and "Poles".
+
+```{r}
+ggplot(merged_dengue_data, aes(x = house_type, y = n_any_infections, color = house_type)) + 
+  geom_boxplot() + 
+  scale_x_discrete(limits = c("Single", "Townhouse", "Poles")) +
+  xlab("House Type") + 
+  ylab("Number of Infections") +
+  ggtitle("Number of Dengue Infections By House Type")
+
+```
