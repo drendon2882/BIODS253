@@ -15,7 +15,7 @@ glimpse(individual_data)
 **Data dictionary:**
 
 | Variable Name        | Description                                                                              |
-|------------------|------------------------------------------------------|
+|----------------------|------------------------------------------------------------------------------------------|
 | `ID`                 | Individual identifier                                                                    |
 | `hh_ID`              | Household identifier                                                                     |
 | `sex`                | Biological sex                                                                           |
@@ -32,7 +32,7 @@ glimpse(household_data)
 **Data Dictionary:**
 
 | Variable Name           | Description                                                                                                                                                                                                                                                                                                       |
-|----------------|--------------------------------------------------------|
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `hh_ID`                 | Household identifier                                                                                                                                                                                                                                                                                              |
 | `door_screens`          | 1, if the household has a screen door. 0, otherwise                                                                                                                                                                                                                                                               |
 | `house_type`            | One of three household types. "Poles" indicates the house is built on stilts, as homes on floodplains typically are. "Single" indicates the house is a single-family home separate from other homes. "Townhouse" indicates the house if part of a multifamily unit where multiple homes are physically connected. |
