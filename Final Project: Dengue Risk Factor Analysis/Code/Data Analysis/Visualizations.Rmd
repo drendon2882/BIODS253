@@ -1,0 +1,18 @@
+# Visualizations
+
+Make a scatterplot of the number of any infections by age. Place age on the x-axis and the number of any infections on the y-axis.
+
+```{r}
+library(tidyverse)
+library(here)
+library(ggplot2)
+
+#import merged dengue data set to complete data analysis
+merged_dengue_data = read_csv(here("Final Project: Dengue Risk Factor Analysis","Data","Processed Data","merged_dengue_data.csv"))
+
+ggplot(merged_dengue_data, aes(x = age, y = n_any_infections)) + 
+  geom_point() + 
+  xlab("Age (years)") + 
+  ylab("Number of Infections") +
+  ggtitle("Number of Dengue Infections By Age")
+```

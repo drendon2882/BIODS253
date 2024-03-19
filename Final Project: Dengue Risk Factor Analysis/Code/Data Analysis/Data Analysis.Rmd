@@ -201,8 +201,8 @@ door_infection_table
 
 ```
 
-| Table 2         | No Infection | Any Infection |
-|-----------------|:------------:|:-------------:|
-| Screen Door, N  |     ---      |      ---      |
-| \- Yes          |     623      |      192      |
-| \- No           |     2906     |      769      |
+| Table 2        | No Infection | Any Infection |
+|----------------|:------------:|:-------------:|
+| Screen Door, N |     ---      |      ---      |
+| \- Yes         |     623      |      192      |
+| \- No          |     2906     |      769      |
