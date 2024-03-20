@@ -48,9 +48,10 @@ The following directories exist in the Final Project: Dengue Risk Factor Analysi
     -   Data Cleaning
 
         -   Data Cleaning.Rmd
-     
-    - Unit Testing
-        - Infection_Concrete_House_Odds.Rmd
+
+    -   Unit Testing
+
+        -   Unit Tests.Rmd
 
 -   Data
 
@@ -70,9 +71,9 @@ The following directories exist in the Final Project: Dengue Risk Factor Analysi
 
 -   Figures
 
-        -   age_vs_infection_plot.png
+    -   age_vs_infections_plot.png
 
-        -   house_type_vs_infection_plot.png
+    -   house_type_vs_infections_plot.png
 
 **Design Document:**
 
