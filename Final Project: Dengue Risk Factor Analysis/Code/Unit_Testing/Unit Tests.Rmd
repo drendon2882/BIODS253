@@ -3,25 +3,6 @@ In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR fu
 ```{r}
 # Load necessary libraries for unit testing
 library(testthat)
-
-
-#define an odds ratio calculation function
-calculate_odds_ratio = function(data) {
- n_infections_concrete = sum(data$any_infections[data$concrete_house == 1])
- n_no_infections_concrete = sum(!data$any_infections[data$concrete_house == 1])
- odds_concrete = n_infections_concrete / n_no_infections_concrete
-  
- n_infections_nonconcrete = sum(data$any_infections[data$concrete_house == 0])
- 
- n_no_infections_nonconcrete = sum(!data$any_infections[data$concrete_house == 0])
- 
- odds_nonconcrete = n_infections_nonconcrete / n_no_infections_nonconcrete
-  
- return(odds_concrete / odds_nonconcrete)
-}
-
-
-
 ```
 
 ```{r}

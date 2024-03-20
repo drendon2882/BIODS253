@@ -43,6 +43,8 @@ The following directories exist in the Final Project: Dengue Risk Factor Analysi
 
         -   Visualizations.Rmd
 
+        -   Functions.Rmd
+
     -   Data Cleaning
 
         -   Data Cleaning.Rmd
