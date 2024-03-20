@@ -21,7 +21,7 @@ concrete_OR = odds_concrete / odds_nonconcrete
 print(paste("Odds of infection by whether house is made from concrete:", concrete_OR))
 ```
 
--   The odds ratio value indicates that there is no association between the house made of concrete and being infected with dengue, although it is slightly above 1 which would mean that an individual has a slightly higher chance of being infected with dengue if he or she lives in a concrete home.
+-   The odds ratio value indicates that there is no association between the house made of concrete and being infected with dengue, although it is slightly above 1 which would mean that an individual has a slightly higher chance (1.018) of being infected with dengue if he or she does not live in a concrete home.
 
 Run a chi-square test to assess if there is a difference in any dengue infection between males and females:
 
@@ -49,7 +49,7 @@ summary(outdoor_toilets_n_infections_lm)
 confint(outdoor_toilets_n_infections_lm)
 ```
 
--   Given that the p-value is greater than 0.585, the results are not statistically significant and the number of outdoor toilets may not affect the number of dengue infections an individual or household has.
+-   *Interpretation:* For each additional toliet, the expected change or increase of the number of dengue infections is 0.00645. However, given that the p-value is greater than 0.585 and the confidence interval includes 0, the results are not statistically significant and the number of outdoor toilets may not affect the number of dengue infections an individual or household has.
 
 Use a logistic model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors:
 
