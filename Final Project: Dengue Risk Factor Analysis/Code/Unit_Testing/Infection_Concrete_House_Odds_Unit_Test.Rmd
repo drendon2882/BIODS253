@@ -1,4 +1,4 @@
-In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR function was created to calculate the odds ratio for being infected with dengue by whether the house is made of concrete or not. Now we will test the function with other synthetic data.
+In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR function was created to calculate the odds ratio for being infected with dengue by whether the house is made of concrete or not. Now we will test a calculate odds ratio function with test data to be able to use in future odds ratio calculations.
 
 ```{r}
 # Load necessary libraries for unit testing
@@ -6,7 +6,7 @@ library(testthat)
 
 
 #define an odds ratio calculation function
-calculate_odds_ratio <- function(data) {
+calculate_odds_ratio = function(data) {
  n_infections_concrete = sum(data$any_infections[data$concrete_house == 1])
  n_no_infections_concrete = sum(!data$any_infections[data$concrete_house == 1])
  odds_concrete = n_infections_concrete / n_no_infections_concrete
