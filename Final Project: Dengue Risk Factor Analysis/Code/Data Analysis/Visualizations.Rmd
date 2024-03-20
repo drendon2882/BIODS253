@@ -10,11 +10,13 @@ library(ggplot2)
 #import merged dengue data set to complete data analysis
 merged_dengue_data = read_csv(here("Final Project: Dengue Risk Factor Analysis","Data","Processed Data","merged_dengue_data.csv"))
 
-ggplot(merged_dengue_data, aes(x = age, y = n_any_infections)) + 
-  geom_point() + 
-  xlab("Age (years)") + 
-  ylab("Number of Infections") +
-  ggtitle("Number of Dengue Infections By Age")
+ggsave(filename = here("Final Project: Dengue Risk Factor Analysis", "Figures", "age_vs_infections_plot.png"),
+       plot = ggplot(merged_dengue_data, aes(x = age, y = n_any_infections)) + 
+                     geom_point() + 
+                     xlab("Age (years)") + 
+                     ylab("Number of Infections") +
+                     ggtitle("Number of Dengue Infections By Age"),
+                     width = 6, height = 4, dpi = 300)
 ```
 
 Make a boxplot of the number of any dengue infections by house type. Place house type of the x-axis and infections on the y-axis. Order the house type from left to right as "Single", "Townhouse", and "Poles".
@@ -26,5 +28,12 @@ ggplot(merged_dengue_data, aes(x = house_type, y = n_any_infections, color = hou
   xlab("House Type") + 
   ylab("Number of Infections") +
   ggtitle("Number of Dengue Infections By House Type")
+
+```
+
+```{r}
+
+# Save the plot
+ggsave(filename = "Final Project: Dengue Risk Factor Analysis/Figures/my_plot.png", plot = , width = 6, height = 4, dpi = 300)
 
 ```
