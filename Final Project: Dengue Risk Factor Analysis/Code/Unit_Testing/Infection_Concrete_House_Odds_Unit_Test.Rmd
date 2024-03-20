@@ -1,0 +1,1 @@
+In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR function was created to calculate the odds ratio for being infected with dengue by whether the house is made of concrete or not. Now we will test the function with other synthetic data.
