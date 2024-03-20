@@ -4,6 +4,8 @@ In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR fu
 # Load necessary libraries for unit testing
 library(testthat)
 
+
+#define an odds ratio calculation function
 calculate_odds_ratio <- function(data) {
  n_infections_concrete = sum(data$any_infections[data$concrete_house == 1])
  n_no_infections_concrete = sum(!data$any_infections[data$concrete_house == 1])
@@ -18,39 +20,41 @@ calculate_odds_ratio <- function(data) {
  return(odds_concrete / odds_nonconcrete)
 }
 
+
+
+```
+
+```{r}
 test_that("Odds ratio calculation is correct", {
- # Mock data
- mock_data <- data.frame(
+#create test data to test odds ratio calculation (expected ratio = 1.5)
+ mock_data = data.frame(
     any_infections = c(TRUE, FALSE, TRUE, FALSE, TRUE),
     concrete_house = c(1, 0, 1, 0, 1)
  )
   
- # Calculate odds ratios
+#calculate odds ratios
  odds_concrete <- calculate_odds_concrete(mock_data)
  odds_nonconcrete <- calculate_odds_nonconcrete(mock_data)
   
- # Calculate the concrete OR, handling cases where odds_nonconcrete is zero
+#calculate the concrete OR, handling cases where odds_nonconcrete is zero
  if (odds_nonconcrete == 0) {
     # Handle the case where odds_nonconcrete is zero
     # For example, set result to Inf or skip the calculation
-    result <- Inf
+    result = Inf
  } else {
     result <- odds_concrete / odds_nonconcrete
  }
   
- # Define expected OR value based on your mock data
- expected_result <- 1.5 # Example value, adjust based on your mock data
+ #define expected OR value based on your mock data
+ expected_result = 1.5 # Example value, adjust based on your mock data
   
- # Adjust the test assertion to handle Inf values
+ #adjust the test assertion to handle Inf values
  if (is.infinite(result)) {
-    # Handle the case where result is Inf
-    # For example, skip the assertion or mark the test as failed
+    #handle the case where result is Inf
     skip("Odds ratio calculation resulted in Inf due to zero denominator.")
  } else {
-    # Assert that the calculated OR matches the expected value
+    #calculated OR matches the expected value
     expect_equal(result, expected_result, tolerance = 0.01)
  }
 })
-
-
 ```
