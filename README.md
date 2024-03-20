@@ -15,7 +15,7 @@ To replicate the project follow these steps:
 
 **Usage:**
 
-1.  Start by cloning the repository to your local directory:
+1.  Start by cloning the repository to your local directory after having opened a project in R Studio code or similar user interface:
 
 ```         
 git clone https://github.com/drendon2882/BIODS253.git
