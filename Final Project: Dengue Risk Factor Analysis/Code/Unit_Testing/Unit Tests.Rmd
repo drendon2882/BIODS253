@@ -1,3 +1,5 @@
+In the Risk Analysis.Rmd file in our data analysis directory, the concrete_OR function was created to calculate the odds ratio for being infected with dengue by whether the house is made of concrete or not. Now we will test a calculate odds ratio function with test data to be able to use in future odds ratio calculations.
+
 ```{r}
 # Load necessary libraries for unit testing
 library(testthat)
@@ -6,14 +8,14 @@ library(testthat)
 ```{r}
 test_that("Odds ratio calculation is correct", {
 #create test data to test odds ratio calculation (expected ratio = 1.5)
-test_data = data.frame(
+ mock_data = data.frame(
     any_infections = c(TRUE, FALSE, TRUE, FALSE, TRUE),
     concrete_house = c(1, 0, 1, 0, 1)
  )
   
 #calculate odds ratios
- odds_concrete = calculate_odds_concrete(test_data)
- odds_nonconcrete = calculate_odds_nonconcrete(test_data)
+ odds_concrete <- calculate_odds_concrete(mock_data)
+ odds_nonconcrete <- calculate_odds_nonconcrete(mock_data)
   
 #calculate the concrete OR, handling cases where odds_nonconcrete is zero
  if (odds_nonconcrete == 0) {
@@ -21,7 +23,7 @@ test_data = data.frame(
     # For example, set result to Inf or skip the calculation
     result = Inf
  } else {
-    result = odds_concrete / odds_nonconcrete
+    result <- odds_concrete / odds_nonconcrete
  }
   
  #define expected OR value based on your mock data
