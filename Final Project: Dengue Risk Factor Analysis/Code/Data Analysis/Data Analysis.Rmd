@@ -86,7 +86,7 @@ gender_infection_table_percent
     concrete_house_infection_table_percent
     ```
 
-<!-- -->
+-   The odds ratio value indicates that there is no association between the house made of concrete and being infected with dengue, although it is slightly above 1 which would mean that an individual has a slightly higher chance (1.018) of being infected with dengue if he or she does not live in a concrete home.
 
 -   Calculate statistics between infection and concrete house types
 
