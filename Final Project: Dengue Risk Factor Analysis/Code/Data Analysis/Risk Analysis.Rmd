@@ -65,7 +65,7 @@ exp(screen_door_infections_glm$coefficients)
 
 ```
 
--   Interpretation: The coefficient associated with having door screens is 0.15, meaning that the log odds of having a dengue infection increase by 0.15 if you do not have a screen door. The odds ratio of having an infection without a screen door is 1.16; however, since the p-value = 0.0975, and this is greater than 0.05, this means that the odds ratio is not statistically significant.
+-   *Interpretation:* The coefficient associated with having door screens is 0.15, meaning that the log odds of having a dengue infection increase by 0.15 if you do not have a screen door. The odds of having an infection without a screen door is 1.16; however, since the p-value = 0.0975, and this is greater than 0.05, this means that the odds ratio is not statistically significant.
 
 Extend the model to estimate the odds ratio and 95% confidence interval of any dengue infection associated with screen doors, controlling for house type and garbage management:
 
@@ -81,4 +81,4 @@ confint(screen_door_infections_controlling_glm)
 exp(screen_door_infections_controlling_glm$coefficients)
 ```
 
-*Interpretation:* The odds ratio of being infected with dengue is 1.12 if you do not have door screens, compared to having door screens; however the p-value is greater than 0.05 so it is not statistically significant.
+*Interpretation:* The odds of being infected with dengue is 1.12 if you do not have door screens, controlling for house type and garbage management; however the p-value is greater than 0.05 so it is not statistically significant.
