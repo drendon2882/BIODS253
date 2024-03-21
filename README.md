@@ -78,3 +78,4 @@ The following directories exist in the Final Project: Dengue Risk Factor Analysi
 **Design Document:**
 
 Link to the design document: <https://docs.google.com/document/d/1CdsMMhr39lHMX926cIvjlbFjTCfkYFFMcseWb3skR-8/edit>
+Link to final project presentation: https://docs.google.com/presentation/d/1O5fQRAt7vz4WWxVJ48Mvi1R5xqKVUDENzWaRmOyx3IA/edit#slide=id.g26c2de2ea8d_0_131
